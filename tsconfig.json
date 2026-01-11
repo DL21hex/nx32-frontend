@@ -1,34 +1,23 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "target": "ES2020",
-    "module": "ES2022",
-    "lib": ["es2022", "DOM", "WebWorker", "DOM.Iterable"],
-    "jsx": "react-jsx",
-    "jsxImportSource": "@builder.io/qwik",
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "Bundler",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "incremental": true,
-    "isolatedModules": true,
-    "outDir": "tmp",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "allowJs": true,
     "noEmit": true,
+    "strict": true,
+    "types": [
+        "./worker-configuration.d.ts",
+        "node",
+        "vinxi/types/client"
+    ],
+    "isolatedModules": true,
     "paths": {
       "~/*": ["./src/*"]
-    },
-    /* if you do not use CSS modules, remove this line and delete the typescript-plugin-css-modules module from package.json */
-    "plugins": [
-        {
-            "name": "typescript-plugin-css-modules"
-        }
-    ],
-    "types": [
-        "@cloudflare/workers-types/2023-07-01",
-        "node"
-    ]
-  },
-  "include": ["src", "./*.d.ts", "./*.config.ts"]
+    }
+  }
 }
