@@ -1,30 +1,30 @@
-export const TENANTS: Record<string, { name: string; logo: string; primaryColor: string; lightColor: string; logoWidth: string }> = {
+export const TENANTS: Record<string, { company_name: string; project_name: string; primaryColor: string; lightColor: string; logoWidth: string }> = {
 	"agrovid-xccui.crearcolombia.com": {
-		name: "Agrovid",
-		logo: "/images/agrovid_small.png",
+		company_name: "Agrovid",
+		project_name: 'agrovid',
 		primaryColor: "#5FA27A",
 		lightColor: "#E8F4EF",
 		logoWidth: "64px",
 	},
 	"maradentro-xccui.crearcolombia.com": {
-		name: "Mar Adentro",
-		logo: "/images/maradentro_small.png",
+		company_name: "Mar Adentro",
+		project_name: "maradentro",
 		primaryColor: "#0E71B9",
 		lightColor: "#E4F0FA",
 		logoWidth: "128px",
 	},
 	"tecbaco-xccui.crearcolombia.com": {
-		name: "Tecbaco",
-		logo: "/images/tecbaco_small.png",
+		company_name: "Tecbaco",
+		project_name: "tecbaco",
 		primaryColor: "#C03321",
 		lightColor: "#F7E7E5",
 		logoWidth: "128px",
-	}
+	},
 };
 
 export const DEFAULT_TENANT = {
-	name: "Crear Colombia",
-	logo: "/images/crearcolombia_small.png",
+	company_name: "Crear Colombia",
+	project_name: "xcc",
 	primaryColor: "#219ebc",
 	lightColor: "#E3F6FB",
 	logoWidth: "96px",
