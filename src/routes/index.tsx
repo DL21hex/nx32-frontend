@@ -1,4 +1,5 @@
-import { createSignal, For, Suspense, createEffect } from "solid-js";
+import { createSignal, For, Suspense, createEffect, Show } from "solid-js";
+import { cache, redirect } from "@solidjs/router";
 import CTA from "~/components/CTA";
 import Card from "~/components/Card";
 
@@ -12,41 +13,31 @@ const componentMap: Record<string, any> = {
   Card: Card,
 };
 
+const fetchContent = cache(async () => {
+  const response = await fetch("http://localhost:80/xcctechpeople/tools/sandbox/home_public");
+  if (!response.ok) {
+    throw new Error(`Error ${response.status}`);
+  }
+  return response.json() as Promise<ComponentItem[]>;
+}, "home-content");
+
 export default function Home() {
   const [items, setItems] = createSignal<ComponentItem[]>([]);
-  const [loading, setLoading] = createSignal(true);
   const [error, setError] = createSignal<string | null>(null);
 
-  const fetchContent = async () => {
+  createEffect(async () => {
     try {
-      setLoading(true);
-      setError(null);
-      console.log("Fetching from /api/home");
-      const response = await fetch("/api/home");
-
-      if (!response.ok) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
-      }
-
-      const data = await response.json() as ComponentItem[];
+      const data = await fetchContent();
       setItems(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error desconocido");
-      setItems([]);
-    } finally {
-      setLoading(false);
     }
-  };
-
-  createEffect(() => {
-    fetchContent();
   });
 
   return (
     <Suspense fallback={<div class="text-muted-foreground">Cargando...</div>}>
-      {loading() && <div class="text-muted-foreground">Cargando...</div>}
       {error() && <div class="text-destructive">Error: {error()}</div>}
-      {!loading() && !error() && (
+      <Show when={items().length > 0}>
         <div class="flex flex-col gap-6">
           <For each={items()}>
             {(item) => {
@@ -55,7 +46,7 @@ export default function Home() {
             }}
           </For>
         </div>
-      )}
+      </Show>
     </Suspense>
   );
 }

@@ -5,7 +5,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-
   server: {
     preset: "cloudflare_module",
     compatibilityDate: "2025-09-27"
