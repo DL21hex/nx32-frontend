@@ -1,0 +1,45 @@
+{
+	"main_menu": [
+		{
+			"id": "inicio",
+			"label": "Inicio",
+			"href": "/",
+			"icon": "home",
+			"is_active": true
+		},
+		{
+			"id": "talento-humano",
+			"label": "Talento Humano",
+			"href": "/talento-humano/empleados",
+			"icon": "users"
+		},
+		{
+			"id": "finanzas",
+			"label": "Finanzas",
+			"href": "/finanzas",
+			"icon": "trending-up"
+		},
+		{
+			"id": "sst",
+			"label": "SST",
+			"href": "/sst",
+			"icon": "shield"
+		},
+		{
+			"id": "tecnologias",
+			"label": "Tecnologías",
+			"href": "/tecnologias",
+			"icon": "cpu"
+		},
+		{
+			"id": "seguridad",
+			"label": "Seguridad Física",
+			"href": "/seguridad",
+			"icon": "lock"
+		}
+	],
+	"header": {
+		"full_name": "Diego Llinás",
+		"position_name": "CEO"
+	}
+}
