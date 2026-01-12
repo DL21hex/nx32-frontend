@@ -1,8 +1,5 @@
-import hcmData from "~/data/hcm.json";
-
 export async function GET() {
-  return new Response(JSON.stringify(hcmData), {
+  return new Response(JSON.stringify([]), {
     headers: { "Content-Type": "application/json" },
   });
 }
-

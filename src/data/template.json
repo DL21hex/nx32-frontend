@@ -9,7 +9,7 @@
 		{
 			"id": "talento-humano",
 			"label": "Talento Humano",
-			"href": "/hcm",
+			"href": "hcm",
 			"icon": "users"
 		},
 		{
