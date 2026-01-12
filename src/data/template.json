@@ -4,8 +4,7 @@
 			"id": "inicio",
 			"label": "Inicio",
 			"href": "/",
-			"icon": "home",
-			"is_active": true
+			"icon": "home"
 		},
 		{
 			"id": "talento-humano",
@@ -40,6 +39,7 @@
 	],
 	"header": {
 		"full_name": "Diego Llinás",
-		"position_name": "CEO"
+		"position_name": "CEO",
+		"avatar": "public/images/default_avatar.png"
 	}
 }
