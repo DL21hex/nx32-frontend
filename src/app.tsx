@@ -24,21 +24,6 @@ interface TemplateData {
 	header: HeaderData;
 }
 
-const fetchTemplate = async () => {
-	try
-	{
-		return await request<TemplateData>("http://localhost/xcctechpeople/tools/xccui_api/template");
-	}
-	catch (e)
-	{
-		return {
-			tenant: { name: "", logo: "", primary_color: "", light_color: "", logo_width: "" },
-			main_menu: [/* TODO: Skeleton...*/ ],
-			header: { full_name: "", position_name: "", avatar: "" }
-		};
-	}
-};
-
 export default function App()
 {
 	const [template, setTemplate] = createSignal<TemplateData>({
@@ -84,13 +69,6 @@ return (
 				if (cached) {
 					if (template().tenant.name === "Skeleton...") {
 						setTemplate(JSON.parse(cached));
-					}
-				} else {
-					if (template().tenant.name === "Skeleton...") {
-						fetchTemplate().then((data) => {
-							//localStorage.setItem("template_data", JSON.stringify(data));
-							setTemplate(data);
-						});
 					}
 				}
 			}

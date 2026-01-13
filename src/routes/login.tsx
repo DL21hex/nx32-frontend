@@ -1,8 +1,11 @@
-import { Component } from "solid-js";
-import { action, redirect } from "@solidjs/router";
+import { Component, createEffect } from "solid-js";
+import { action, useSubmission} from "@solidjs/router";
+import { getRequestEvent } from "solid-js/web";
 
 const loginAction = action(async (formData: FormData) => {
 	"use server";
+	const event = getRequestEvent();
+
 	try {
 		const response = await fetch("http://localhost/xcctechpeople/xcc/system/users/authenticate_public", {
 			method: "POST",
@@ -14,16 +17,16 @@ const loginAction = action(async (formData: FormData) => {
 			throw new Error("Credenciales inválidas");
 		}
 
+		const data = await response.json();
+
 		const setCookie = response.headers.get("Set-Cookie");
 		const headers = new Headers();
-		if (setCookie)
+		if (setCookie && event)
 		{
-			headers.append("Set-Cookie", setCookie);
+			event.response.headers.append("Set-Cookie", setCookie);
 		}
 
-		return redirect("/", {
-			headers: headers
-		});
+		return data;
 	}
 	catch (error)
 	{
@@ -33,62 +36,73 @@ const loginAction = action(async (formData: FormData) => {
 });
 
 const Login: Component = () => {
-return (
-	<div class="flex min-h-screen items-center justify-center bg-background">
-	<div class="w-full max-w-md space-y-8 rounded-lg border border-border bg-card p-8 shadow-lg">
-		<div class="text-center">
-		<h2 class="text-2xl font-bold tracking-tight text-foreground">
-			Iniciar Sesión
-		</h2>
-		<p class="mt-2 text-sm text-muted-foreground">
-			Ingresa tus credenciales para acceder
-		</p>
-		</div>
+	const submission = useSubmission(loginAction);
 
-		<form action={loginAction} method="post" class="mt-8 space-y-6">
-		<div class="space-y-4 rounded-md shadow-sm">
-			<div>
-			<label for="username" class="block text-sm font-medium text-foreground">
-				Núm. documento de identidad
-			</label>
-			<input
-				id="username"
-				name="username"
-				type="text"
-				autocomplete="username"
-				required
-				class="relative mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring sm:text-sm"
-				placeholder="usuario"
-			/>
-			</div>
-			<div>
-			<label for="password" class="block text-sm font-medium text-foreground">
-				Contraseña
-			</label>
-			<input
-				id="password"
-				name="password"
-				type="password"
-				autocomplete="current-password"
-				required
-				class="relative mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring sm:text-sm"
-				placeholder="••••••••"
-			/>
-			</div>
-		</div>
+	createEffect(() => {
+		if (submission.result)
+		{
+			console.log(submission.result);
+			localStorage.setItem("template_data", JSON.stringify(submission.result));
+			window.location.href = "/";
+		}
+	});
 
-		<div>
-			<button
-			type="submit"
-			class="group relative flex w-full justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-			>
-			Ingresar
-			</button>
+	return (
+		<div class="flex min-h-screen items-center justify-center bg-background">
+		<div class="w-full max-w-md space-y-8 rounded-lg border border-border bg-card p-8 shadow-lg">
+			<div class="text-center">
+			<h2 class="text-2xl font-bold tracking-tight text-foreground">
+				Iniciar Sesión
+			</h2>
+			<p class="mt-2 text-sm text-muted-foreground">
+				Ingresa tus credenciales para acceder
+			</p>
+			</div>
+
+			<form action={loginAction} method="post" class="mt-8 space-y-6">
+			<div class="space-y-4 rounded-md shadow-sm">
+				<div>
+				<label for="username" class="block text-sm font-medium text-foreground">
+					Núm. documento de identidad
+				</label>
+				<input
+					id="username"
+					name="username"
+					type="text"
+					autocomplete="username"
+					required
+					class="relative mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring sm:text-sm"
+					placeholder="usuario"
+				/>
+				</div>
+				<div>
+				<label for="password" class="block text-sm font-medium text-foreground">
+					Contraseña
+				</label>
+				<input
+					id="password"
+					name="password"
+					type="password"
+					autocomplete="current-password"
+					required
+					class="relative mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring sm:text-sm"
+					placeholder="••••••••"
+				/>
+				</div>
+			</div>
+
+			<div>
+				<button
+				type="submit"
+				class="group relative flex w-full justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+				>
+				Ingresar
+				</button>
+			</div>
+			</form>
 		</div>
-		</form>
-	</div>
-	</div>
-);
+		</div>
+	);
 };
 
 export default Login;
