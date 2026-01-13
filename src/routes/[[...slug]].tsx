@@ -17,7 +17,7 @@ const componentMap: Record<string, any> = {
 };
 
 const fetchContent = async (path: string) => {
-  return request<ComponentItem[]>(`http://localhost:80/xcctechpeople/tools/sandbox/${path}`);
+  return request<ComponentItem[]>(`http://localhost/xcctechpeople/xcc/${path}`);
 };
 
 function NotFound() {
