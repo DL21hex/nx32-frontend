@@ -16,9 +16,11 @@
 		"vinxi": "^0.5.7"
 	},
 	"devDependencies": {
+		"@iconify-json/hugeicons": "^1.2.22",
 		"@tailwindcss/vite": "^4.0.7",
 		"@types/node": "^25.0.6",
 		"tailwindcss": "^4.0.7",
+		"unplugin-icons": "^22.5.0",
 		"wrangler": "^4.58.0"
 	},
 	"engines": {

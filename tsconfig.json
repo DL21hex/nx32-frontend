@@ -13,7 +13,8 @@
     "types": [
         "./worker-configuration.d.ts",
         "node",
-        "vinxi/types/client"
+        "vinxi/types/client",
+        "unplugin-icons/types/solid"
     ],
     "isolatedModules": true,
     "paths": {

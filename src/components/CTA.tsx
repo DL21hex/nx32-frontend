@@ -1,4 +1,9 @@
 import { createSignal, Show } from "solid-js";
+import IconAlert from '~icons/hugeicons/alert-02';
+import IconInfo from '~icons/hugeicons/information-circle';
+import IconSuccess from '~icons/hugeicons/checkmark-circle-02';
+import IconArrowRight from '~icons/hugeicons/arrow-right-01';
+import IconClose from '~icons/hugeicons/cancel-01';
 
 const typeColorMap: Record<string, { border: string; bg: string; badge: string; icon: string; button: string }> = {
   warning: {
@@ -24,6 +29,12 @@ const typeColorMap: Record<string, { border: string; bg: string; badge: string; 
   },
 };
 
+const typeIconMap: Record<string, typeof IconAlert> = {
+  warning: IconAlert,
+  info: IconInfo,
+  success: IconSuccess,
+};
+
 interface CTAProps {
   type: "warning" | "info" | "success";
   badge: string;
@@ -36,6 +47,7 @@ interface CTAProps {
 export default function CTA(props: CTAProps) {
   const [isDismissed, setIsDismissed] = createSignal(false);
   const colors = typeColorMap[props.type] || typeColorMap.warning;
+  const IconComponent = typeIconMap[props.type] || IconAlert;
 
   return (
     <Show when={!isDismissed()}>
@@ -46,22 +58,7 @@ export default function CTA(props: CTAProps) {
         <div data-slot="card-content" class="p-4 sm:p-5">
         <div class="flex items-start gap-4">
           <div class={`p-2.5 rounded-xl ${colors.icon} shrink-0`}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide h-5 w-5"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" x2="12" y1="8" y2="12"></line>
-              <line x1="12" x2="12.01" y1="16" y2="16"></line>
-            </svg>
+            <IconComponent class="lucide h-5 w-5" />
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 mb-1">
@@ -84,21 +81,7 @@ export default function CTA(props: CTAProps) {
                 class={`inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 h-8 rounded-md gap-1.5 px-3 text-white ${colors.button}`}
               >
                 {props.button_name}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-arrow-right h-4 w-4 ml-1.5"
-                >
-                  <path d="M5 12h14"></path>
-                  <path d="m12 5 7 7-7 7"></path>
-                </svg>
+                <IconArrowRight class="lucide h-4 w-4 ml-1.5" />
               </button>
             </a>
             <button
@@ -106,21 +89,7 @@ export default function CTA(props: CTAProps) {
               class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all hover:bg-accent size-9 h-8 w-8 text-muted-foreground hover:text-slate-700"
               onClick={() => setIsDismissed(true)}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-x h-4 w-4"
-              >
-                <path d="M18 6 6 18"></path>
-                <path d="m6 6 12 12"></path>
-              </svg>
+              <IconClose class="lucide h-4 w-4" />
               <span class="sr-only">Descartar</span>
             </button>
           </div>
