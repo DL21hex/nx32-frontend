@@ -16,7 +16,7 @@
 		"vinxi": "^0.5.7"
 	},
 	"devDependencies": {
-		"@iconify-json/hugeicons": "^1.2.22",
+		"@iconify-json/lucide": "^1.2.84",
 		"@tailwindcss/vite": "^4.0.7",
 		"@types/node": "^25.0.6",
 		"tailwindcss": "^4.0.7",

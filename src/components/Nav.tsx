@@ -1,19 +1,23 @@
 import { For, createSignal, createEffect, type Component, type JSX } from "solid-js";
-import IconHome from '~icons/hugeicons/home-01';
-import IconUsers from '~icons/hugeicons/user-group';
-import IconShield from '~icons/hugeicons/shield-01';
-import IconFactory from '~icons/hugeicons/factory-02';
-import IconCpu from '~icons/hugeicons/cpu';
-import IconLock from '~icons/hugeicons/lock-key';
-import IconSettings from '~icons/hugeicons/settings-01';
+import IconHome from '~icons/lucide/home';
+import IconUsers from '~icons/lucide/users';
+import IconTrendingUp from '~icons/lucide/trending-up';
+import IconShield from '~icons/lucide/shield';
+import IconFactory from '~icons/lucide/factory';
+import IconShoppingCart from '~icons/lucide/shopping-cart';
+import IconCpu from '~icons/lucide/cpu';
+import IconLock from '~icons/lucide/lock';
+import IconSettings from '~icons/lucide/settings';
 
 export const [activeMenuItem, setActiveMenuItem] = createSignal<string | null>(null);
 
 const iconMap: Record<string, Component<JSX.SvgSVGAttributes<SVGSVGElement>>> = {
   home: IconHome,
   users: IconUsers,
+  "trending-up": IconTrendingUp,
   shield: IconShield,
   factory: IconFactory,
+  "shopping-cart": IconShoppingCart,
   cpu: IconCpu,
   lock: IconLock,
   settings: IconSettings,

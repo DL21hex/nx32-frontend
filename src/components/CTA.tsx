@@ -1,9 +1,9 @@
 import { createSignal, Show } from "solid-js";
-import IconAlert from '~icons/hugeicons/alert-02';
-import IconInfo from '~icons/hugeicons/information-circle';
-import IconSuccess from '~icons/hugeicons/checkmark-circle-02';
-import IconArrowRight from '~icons/hugeicons/arrow-right-01';
-import IconClose from '~icons/hugeicons/cancel-01';
+import IconAlert from '~icons/lucide/alert-triangle';
+import IconInfo from '~icons/lucide/info';
+import IconSuccess from '~icons/lucide/check-circle-2';
+import IconArrowRight from '~icons/lucide/arrow-right';
+import IconClose from '~icons/lucide/x';
 
 const typeColorMap: Record<string, { border: string; bg: string; badge: string; icon: string; button: string }> = {
   warning: {
