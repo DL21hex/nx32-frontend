@@ -3,14 +3,14 @@ import { createMiddleware } from "@solidjs/start/middleware";
 export default createMiddleware({
 	onRequest: [
 		async (event) => {
+
 			const url = new URL(event.request.url);
+			const cookieHeader = event.request.headers.get("Cookie");
 
 			if (url.pathname.startsWith("/_build") || url.pathname.startsWith("/assets") || url.pathname.includes(".png") || url.pathname.endsWith("/login") || (url.pathname.startsWith("/_server") && event.request.headers.get("Referer")?.includes("/login")))
 			{
 				return;
 			}
-
-			const cookieHeader = event.request.headers.get("Cookie");
 
 			try
 			{

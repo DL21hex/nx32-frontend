@@ -78,8 +78,27 @@ export default function Home() {
     try {
       const path = location.pathname === "/" ? "home_public" : location.pathname.substring(1);
       const data = await fetchContent(path);
+
+      if (!Array.isArray(data)) {
+        throw new Error("Invalid content response");
+      }
+
       setItems(data);
     } catch (err) {
+      try {
+        const response = await fetch("http://localhost/xcctechpeople/tools/sandbox/validate_session_public", {
+            credentials: "include"
+        });
+
+        if (!response.ok) {
+           if (typeof window !== "undefined") window.location.href = "/login";
+           return;
+        }
+      } catch (e) {
+          if (typeof window !== "undefined") window.location.href = "/login";
+          return;
+      }
+
       setError(err instanceof Error ? err.message : "Error desconocido");
       setItems([]);
     } finally {
