@@ -1,10 +1,14 @@
 import { useLocation } from "@solidjs/router";
 import { createEffect, createSignal, For, Show, Suspense } from "solid-js";
+import { request } from "~/utils/request";
+import { setBreadcrumbs } from "~/components/Breadcrumb";
+
 import Card from "~/components/Card";
 import CTA from "~/components/CTA";
 import Nav, { setActiveMenuItem } from "~/components/Nav";
-import { request } from "~/utils/request";
-import { setBreadcrumbs } from "~/components/Breadcrumb";
+import Profile from "~/components/Profile";
+import Toolbar from "~/components/Toolbar";
+
 import IconFolderCode from '~icons/lucide/folder-code';
 import IconLoaderCircle from '~icons/lucide/loader-circle';
 
@@ -12,6 +16,8 @@ const componentMap: Record<string, any> = {
 	CTA: CTA,
 	Card: Card,
 	Nav: Nav,
+	Profile: Profile,
+	Toolbar: Toolbar,
 };
 
 interface ComponentItem {

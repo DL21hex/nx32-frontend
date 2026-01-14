@@ -92,7 +92,7 @@ return (
 			<div class="mt-auto">
 			<div data-orientation="horizontal" role="none" data-slot="separator" class={`bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px mx-3 ${isSidebarCollapsed() ? 'hidden' : ''}`}></div>
 			<div class={`py-3 space-y-0.5 ${isSidebarCollapsed() ? 'px-2' : 'px-3'}`}>
-				<a href="/system/users/general_information_for_all" class={`flex items-center w-full rounded-md text-[13px] font-medium transition-all duration-150 ${isSidebarCollapsed() ? 'justify-center px-2' : 'justify-start gap-3 px-3'} py-2 text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground`} data-state="closed" data-slot="tooltip-trigger" title={isSidebarCollapsed() ? "Mi Perfil" : undefined}>
+				<a href="/system/users/profile_for_all" class={`flex items-center w-full rounded-md text-[13px] font-medium transition-all duration-150 ${isSidebarCollapsed() ? 'justify-center px-2' : 'justify-start gap-3 px-3'} py-2 text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground`} data-state="closed" data-slot="tooltip-trigger" title={isSidebarCollapsed() ? "Mi Perfil" : undefined}>
 					<IconUser class="lucide h-[18px] w-[18px] shrink-0 text-sidebar-foreground/60" />
 					<span class={isSidebarCollapsed() ? 'hidden' : ''}>Mi Perfil</span>
 				</a>

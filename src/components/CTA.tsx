@@ -1,4 +1,5 @@
 import { createSignal, Show } from "solid-js";
+import Button from "./Button";
 import IconAlert from '~icons/lucide/alert-triangle';
 import IconInfo from '~icons/lucide/info';
 import IconSuccess from '~icons/lucide/check-circle-2';
@@ -75,15 +76,12 @@ export default function CTA(props: CTAProps) {
             </p>
           </div>
           <div class="flex items-center gap-2 shrink-0">
-            <a href={props.button_href}>
-              <button
-                data-slot="button"
-                class={`inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 h-8 rounded-md gap-1.5 px-3 text-white ${colors.button}`}
-              >
-                {props.button_name}
-                <IconArrowRight class="lucide h-4 w-4 ml-1.5" />
-              </button>
-            </a>
+            <Button
+              href={props.button_href}
+              label={props.button_name}
+              icon={IconArrowRight}
+              class={`h-8 ${colors.button} text-white border-transparent`}
+            />
             <button
               data-slot="button"
               class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all hover:bg-accent size-9 h-8 w-8 text-muted-foreground hover:text-slate-700"
