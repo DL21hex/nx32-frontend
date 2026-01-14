@@ -41,7 +41,6 @@ const Login: Component = () => {
 	createEffect(() => {
 		if (submission.result)
 		{
-			console.log(submission.result);
 			localStorage.setItem("template_data", JSON.stringify(submission.result));
 			window.location.href = "/";
 		}

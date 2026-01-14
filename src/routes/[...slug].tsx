@@ -63,12 +63,7 @@ export default function CatchAll()
 
 			if (data && data.breadcrumbs)
 			{
-				//setBreadcrumbs(data.breadcrumbs);
-				setBreadcrumbs([
-					{ label: "Home", href: "/" },
-					{ label: "Building Your Application", href: "#" },
-					{ label: "Data Fetching" }
-				]);
+				setBreadcrumbs(data.breadcrumbs);
 			}
 
 			if (data && data.main_menu?.set_active) {

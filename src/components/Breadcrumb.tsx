@@ -16,18 +16,19 @@ export const Breadcrumb = (props: BreadcrumbProps) => {
 
   return (
     <nav aria-label="breadcrumb" class={local.class} {...rest}>
-      <ol class="text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5">
+      <ol class="text-muted-foreground flex flex-wrap items-center gap-1.5 text-[13px] break-words sm:gap-2.5">
         <For each={local.items}>
           {(item, index) => {
-            const isLast = index() === local.items.length - 1;
+            const isLast = () => index() === local.items.length - 1;
 
             return (
               <>
                 <li
-                  class={`inline-flex items-center gap-1.5 ${!isLast ? "hidden md:inline-flex" : ""}`}
+                  class="inline-flex items-center gap-1.5"
+                  classList={{ "hidden md:inline-flex": !isLast() }}
                 >
                   <Show
-                    when={!isLast}
+                    when={!isLast()}
                     fallback={
                       <span class="text-foreground font-normal" aria-current="page">
                         {item.label}
@@ -43,7 +44,7 @@ export const Breadcrumb = (props: BreadcrumbProps) => {
                   </Show>
                 </li>
 
-                <Show when={!isLast}>
+                <Show when={!isLast()}>
                   <li role="presentation" aria-hidden="true" class="[&>svg]:size-3.5 hidden md:block">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

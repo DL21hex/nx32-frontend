@@ -1,4 +1,4 @@
-import { For, createSignal, createEffect, type Component, type JSX } from "solid-js";
+import { For, createSignal, createEffect, type Component, type JSX, createSelector } from "solid-js";
 import IconHome from '~icons/lucide/home';
 import IconHCM from '~icons/lucide/users';
 import IconFinancial from '~icons/lucide/trending-up';
@@ -42,6 +42,8 @@ export default function Nav(props: NavProps) {
     }
   });
 
+  const isSelected = createSelector(activeMenuItem);
+
   if (!props.items) {
     return null;
   }
@@ -53,31 +55,41 @@ export default function Nav(props: NavProps) {
           Menú principal
         </span>
       </div>
-      <nav class={`space-y-0.5 px-3`}>
+      <nav class="space-y-0.5 px-3">
         <For each={props.items}>
           {(item) => {
             const IconComponent = iconMap[item.icon];
+            const isActive = () => activeMenuItem() ? isSelected(item.id) : item.is_active;
+
             return (
               <div>
                 <a
                   href={item.href}
-                  class={`flex items-center w-full rounded-md text-[13px] font-medium transition-all duration-150 ${props.collapsed ? 'justify-center px-2' : 'justify-between px-3'} py-2 ${
-                    (activeMenuItem() ? item.id === activeMenuItem() : item.is_active)
-                      ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                      : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
-                  }`}
+                  class="flex items-center w-full rounded-md text-[13px] font-medium transition-all duration-150 py-2"
+                  classList={{
+                    'justify-center px-2': props.collapsed,
+                    'justify-between px-3': !props.collapsed,
+                    'bg-sidebar-accent text-sidebar-accent-foreground': !!isActive(),
+                    'text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground': !isActive()
+                  }}
                   data-state="closed"
                   data-slot="tooltip-trigger"
                   title={props.collapsed ? item.label : undefined}
                 >
-                  <div class={`flex items-center ${props.collapsed ? 'gap-0' : 'gap-3'}`}>
+                  <div
+                    class="flex items-center"
+                    classList={{
+                        'gap-0': props.collapsed,
+                        'gap-3': !props.collapsed
+                    }}
+                  >
                     {IconComponent && (
                       <IconComponent
-                        class={`lucide h-[18px] w-[18px] shrink-0 ${
-                          (activeMenuItem() ? item.id === activeMenuItem() : item.is_active)
-                            ? "text-sidebar-accent-foreground"
-                            : "text-sidebar-foreground/60"
-                        }`}
+                        class="lucide h-[18px] w-[18px] shrink-0"
+                        classList={{
+                            'text-sidebar-accent-foreground': !!isActive(),
+                            'text-sidebar-foreground/60': !isActive()
+                        }}
                       />
                     )}
                     <span class={props.collapsed ? 'hidden' : ''}>{item.label}</span>
