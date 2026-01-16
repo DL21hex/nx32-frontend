@@ -1,9 +1,17 @@
 import { createMiddleware } from "@solidjs/start/middleware";
-import { API_BASE_URL } from "~/constants/api";
+import { resolveTenantConfig } from "~/utils/config";
 
 export default createMiddleware({
 	onRequest: [
 		async (event) => {
+			// Resolve Tenant Config (KV)
+			const config = await resolveTenantConfig(event.request, event.nativeEvent.context.cloudflare?.env || {});
+
+			// Store in Locals
+			event.locals.apiBaseUrl = config.apiBaseUrl;
+			if (config.openaiApiKey) {
+				event.locals.openaiApiKey = config.openaiApiKey;
+			}
 
 			const url = new URL(event.request.url);
 			const cookieHeader = event.request.headers.get("Cookie");
@@ -15,7 +23,7 @@ export default createMiddleware({
 
 			try
 			{
-				const response = await fetch(`${API_BASE_URL}/system/users/validate_session_public`, {
+				const response = await fetch(`${config.apiBaseUrl}/system/users/validate_session_public`, {
 					method: "GET",
 					headers: {
 						Cookie: cookieHeader || "",

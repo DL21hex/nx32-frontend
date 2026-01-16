@@ -1,14 +1,16 @@
 import { Component, createEffect } from "solid-js";
 import { action, useSubmission} from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
-import { API_BASE_URL } from "~/constants/api";
+import { getApiBaseUrl } from "~/constants/api";
 
 const loginAction = action(async (formData: FormData) => {
 	"use server";
 	const event = getRequestEvent();
+	const apiBaseUrl = getApiBaseUrl(event);
 
 	try {
-		const response = await fetch(`${API_BASE_URL}/system/users/authenticate_public`, {
+		console.log('Feching login API:', `${apiBaseUrl}/system/users/authenticate_public`);
+		const response = await fetch(`${apiBaseUrl}/system/users/authenticate_public`, {
 			method: "POST",
 			body: formData,
 		});
