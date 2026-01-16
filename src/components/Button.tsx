@@ -1,5 +1,4 @@
 import { type Component, type JSX, splitProps } from "solid-js";
-import { Dynamic } from "solid-js/web";
 import { SEMANTIC_COLORS, type SemanticType } from "../constants/colors";
 
 type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & JSX.AnchorHTMLAttributes<HTMLAnchorElement> & {
@@ -34,8 +33,7 @@ export default function Button(props: ButtonProps) {
   const sizeClass = sizeClasses[local.size || "default"];
 
   return (
-    <Dynamic
-      component={local.href ? "a" : "button"}
+    <a
       href={local.href}
       data-slot="button"
       data-variant={local.variant || "default"}
@@ -45,6 +43,6 @@ export default function Button(props: ButtonProps) {
     >
       {local.icon && <local.icon class="h-4 w-4" />}
       <span class={local.size === "icon" ? "sr-only" : ""}>{local.label}</span>
-    </Dynamic>
+    </a>
   );
 }

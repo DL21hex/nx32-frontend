@@ -47,8 +47,11 @@ export default function CTA(props: CTAProps) {
                 data-slot="badge"
                 class={`inline-flex items-center justify-center rounded-md border px-2 py-0.5 w-fit whitespace-nowrap shrink-0 text-xs font-medium ${theme.lightBg} ${theme.lightText}`}
               >
-                {props.badge}
+				Alerta
               </span>
+			  <span>
+				<span class="text-xs text-muted-foreground">{props.badge}</span>
+			  </span>
             </div>
             <h3 class="font-semibold text-slate-900 mb-1">{props.title}</h3>
             <p class="text-sm text-muted-foreground line-clamp-2">
