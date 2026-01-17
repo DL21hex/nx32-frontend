@@ -23,6 +23,7 @@ const loginAction = action(async (formData: FormData) => {
 		const data = await response.json();
 
 		const setCookie = response.headers.get("Set-Cookie");
+		console.log(setCookie);
 		const headers = new Headers();
 		if (setCookie && event)
 		{
