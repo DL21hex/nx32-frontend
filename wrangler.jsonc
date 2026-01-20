@@ -50,7 +50,7 @@
 	"services": [
 		{
 			"binding": "CORE_SERVICE",
-			"service": "nx32_core"
+			"service": "nx32"
 		}
 	]
 }
