@@ -4,7 +4,7 @@
 */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "xcc-ui",
+	"name": "nx32-frontend",
 	"main": "./.output/server/index.mjs",
 	"compatibility_date": "2025-09-27",
 	"compatibility_flags": [
@@ -50,7 +50,7 @@
 	"services": [
 		{
 			"binding": "CORE_SERVICE",
-			"service": "nx32"
+			"service": "nx32-core"
 		}
 	]
 }
