@@ -3,6 +3,8 @@ import { action, useSubmission} from "@solidjs/router";
 import { getRequestEvent } from "solid-js/web";
 
 const loginAction = action(async (formData: FormData) => {
+	return false
+	/*
 	"use server";
 	const event = getRequestEvent();
 
@@ -48,6 +50,7 @@ const loginAction = action(async (formData: FormData) => {
 		console.error("Error conectando con el Core:", error);
         throw error;
 	}
+	*/
 });
 
 const Login: Component = () => {

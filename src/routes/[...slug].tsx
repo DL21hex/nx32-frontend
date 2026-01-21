@@ -1,15 +1,11 @@
 import { useLocation } from "@solidjs/router";
 import { createEffect, createSignal, For, Show, Suspense } from "solid-js";
-import { request } from "~/utils/request";
-import { getApiBaseUrl } from "~/constants/api";
 import { setBreadcrumbs } from "~/components/Breadcrumb";
-
 import Card from "~/components/Card";
 import CTA from "~/components/CTA";
 import Nav, { setActiveMenuItem } from "~/components/Nav";
 import Profile from "~/components/Profile";
 import Toolbar from "~/components/Toolbar";
-
 import IconFolderCode from '~icons/lucide/folder-code';
 import IconLoaderCircle from '~icons/lucide/loader-circle';
 
@@ -36,7 +32,8 @@ interface PageResponse {
 
 const fetchContent = async (path: string) => {
 	const result = path === "/" ? "/home/main/index_for_all" : path;
-	return request<PageResponse>(`${getApiBaseUrl()}${result}`);
+	return "";
+	//return request<PageResponse>(result);
 };
 
 export default function CatchAll()

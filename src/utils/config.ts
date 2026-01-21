@@ -1,25 +1,3 @@
-import { getRequestEvent } from "solid-js/web";
-
-export const getApiBaseUrl = (serverEvent?: any) => {
-	if (typeof window !== "undefined")
-	{
-		return (window as any).APP_CONFIG?.API_BASE_URL ?? "http://localhost:8787";
-	}
-
-	const event = serverEvent || getRequestEvent();
-	if (event)
-	{
-		if (event.locals?.apiBaseUrl)
-		{
-			return event.locals.apiBaseUrl;
-		}
-
-		return import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8787";
-	}
-
-	return "http://localhost:8787";
-};
-
 export interface TenantConfig {
 	apiBaseUrl: string;
 	openaiApiKey?: string;
